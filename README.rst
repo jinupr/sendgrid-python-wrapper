@@ -63,7 +63,7 @@ Note: Mandatory Parameters
 
     #or
 
-    advanced_st = sendgrid.AdvancedStatistics(data_Type="global", start_date="2014-04-13",validate=True,end_date="2014-04-17",
+    advanced_st = sendgrid.AdvancedStatistics(data_type="global", start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                                metric="all",category="WebD:CampId:3100",aggregated_by="day",country="US")
     status,msg = sg.send(advanced_st)
 
