@@ -36,9 +36,8 @@ class TestSendGrid(unittest.TestCase):
                                             start_date="2014-04-14",end_date="2014-04-20",
                                             aggregate=0,category="WebD:CampId:3100")
         print self.sg.send(self.general_st)
-        self.general_st = sendgrid.GeneralStatistics(days=2, 
-                                            start_date="2014-04-14",end_date="2014-04-20",
-                                            aggregate=0,category="WebD:CampId:3100",validate=True)
+        self.general_st = sendgrid.GeneralStatistics(days=90, 
+                                            aggregate=0,category="WebD:CampId:1",validate=True)
         print self.sg.send(self.general_st)
         
 
@@ -117,38 +116,39 @@ class TestSendGridAdvancedStatistics(unittest.TestCase):
         self.assertEqual(self.sg.endpoint, "/api/stats.getAdvanced.json")
 
     def test_default_values_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",
+                              start_date="2014-04-13", validate=True) 
         self.assertEqual(self.advanced_st.validate,True)
         print self.sg.send(self.advanced_st)
 
     def test_default_input_values_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-13",
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-13",
                                                 validate=True,end_date="2014-04-13",metric="all", 
                                                 aggregated_by="day",category="WebD:CampId:3100")
         print self.sg.send(self.advanced_st)
 
     def test_set_data_type_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global", start_date="2014-04-14", validate=True) 
         self.advanced_st.set_data_type("browsers")
         self.assertEqual(self.advanced_st.data_type,"browsers")
         print self.sg.send(self.advanced_st)
 
     def test_set_start_date_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-14", validate=True) 
         self.assertRaises(ValueError, self.advanced_st.set_start_date,"browsers")
         self.advanced_st.set_start_date("2014-02-14")
         self.assertEqual(self.advanced_st.start_date,"2014-02-14")
         print self.sg.send(self.advanced_st)
 
     def test_set_end_date_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-14", validate=True) 
         self.assertRaises(ValueError, self.advanced_st.set_end_date,"browsers")
         self.advanced_st.set_end_date("2014-04-14")
         self.assertEqual(self.advanced_st.end_date,"2014-04-14")
         print self.sg.send(self.advanced_st)
   
     def test_set_metric_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-14", validate=True) 
         self.advanced_st.set_metric("bounce")
         self.assertEqual(self.advanced_st.metric,"bounce")
         self.advanced_st.set_metric("all")
@@ -157,7 +157,7 @@ class TestSendGridAdvancedStatistics(unittest.TestCase):
         print self.sg.send(self.advanced_st)
     
     def test_set_category_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-14", validate=True) 
         self.advanced_st.set_category("WebD:CampId:3150")
         self.assertEqual(self.advanced_st.category,"WebD:CampId:3150")
         self.advanced_st.set_category("WebD:CampId:3100")
@@ -165,34 +165,36 @@ class TestSendGridAdvancedStatistics(unittest.TestCase):
         print self.sg.send(self.advanced_st)
     
     def test_set_aggregated_by_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-14", validate=True) 
         self.advanced_st.set_aggregated_by("day")
         self.assertEqual(self.advanced_st.aggregated_by,"day")
         print self.sg.send(self.advanced_st)
     
     def test_set_country_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14", validate=True) 
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-14", validate=True) 
         self.advanced_st.set_country("US")
         self.assertEqual(self.advanced_st.country,"US")
         print self.sg.send(self.advanced_st)
     
     def test_input_values_test__advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-04-13",validate=True,end_date="2014-04-17",
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                             metric="all",category="WebD:CampId:3100")
         print self.sg.send(self.advanced_st)
 
     def test_input_values_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global", "2014-04-13",validate=True,end_date="2014-04-17",
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",
+                                            start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                             metric="all",category="WebD:CampId:3100",aggregated_by="day",country="US")
         print self.sg.send(self.advanced_st)
 
     def test_input_aggregated_by_week_values_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global", "2014-02",validate=True,end_date="2014-04",
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",
+                                            start_date="2014-02",validate=True,end_date="2014-04",
                                             metric="all",category="WebD:CampId:3100",aggregated_by="week",country="US")
         print self.sg.send(self.advanced_st)
 
     def test_input_aggregated_by_mnth_values_advanced_statistics(self):
-        self.advanced_st = sendgrid.AdvancedStatistics("global","2014-02",end_date="2014-04",
+        self.advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-02",end_date="2014-04",
                                             metric="all",category="WebD:CampId:3100",aggregated_by="month")
         print self.sg.send(self.advanced_st)
 

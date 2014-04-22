@@ -2,14 +2,6 @@
 This library allows you to quickly and easily use SendGrid API using Python.
 
 
-## Install
-
-```bash
-pip install sendgrid
-# or
-easy_install sendgrid
-```
-
 ## Example
 
 ```python
@@ -38,8 +30,9 @@ status, msg = sg.send(general_st)
 ## example for Advanced Statistics
 
 #Note: Mandatory Parameters : data_type and start_date
+#By default data_type will be global and start_date will be set as current date
 
-advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14")
+advanced_st = sendgrid.AdvancedStatistics()
     
 
 advanced_st.set_data_type("browsers")
@@ -52,7 +45,7 @@ advanced_st.set_country("US")
 status,msg = sg.send(advanced_st)
 
 #or
-advanced_st = sendgrid.AdvancedStatistics("global","2014-04-13",validate=True,end_date="2014-04-17",
+advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                            metric="all",category="WebD:CampId:3100",aggregated_by="day",country="US")
 status,msg = sg.send(advanced_st)
 
@@ -62,16 +55,17 @@ By default set method will not validate the parameters
 however you can pass validate=True to GeneralStatistics or AdvancedStatistics
 constructor to validate the parameters before sending
 
-    for example:
+for example:
+    ```python
         general_st = sendgrid.GeneralStatistics(days=2,start_date="2014-04-14",end_date="2014-04-20",
                                             aggregate=0,category="WebD:CampId:3100",validate=True)
         status, msg = sg.send(general_st)
         
 
-        advanced_st = sendgrid.AdvancedStatistics("global","2014-04-13",validate=True,end_date="2014-04-17",
+        advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                             metric="all",category="WebD:CampId:3100")
         status,msg = sg.send(advanced_st)
-
+    ```
 
 
 
@@ -142,7 +136,7 @@ general_st.add_category("WebD:CampId:3150")
 ###### Methods for Advanced Statistics
 
 ```python
-advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14")
+advanced_st = sendgrid.AdvancedStatistics(data_type="global", start_date="2014-04-14")
 ```
 
 ### Setting the data_type

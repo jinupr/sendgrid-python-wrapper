@@ -45,9 +45,11 @@ example for Advanced Statistics
 Note: Mandatory Parameters
             -data_type 
             -start_date
+        Default data_type value ="global"
+        Default start_date = Current date
 .. code::
 
-    advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14")
+    advanced_st = sendgrid.AdvancedStatistics()
         
 
     advanced_st.set_data_type("browsers")
@@ -61,7 +63,7 @@ Note: Mandatory Parameters
 
     #or
 
-    advanced_st = sendgrid.AdvancedStatistics("global","2014-04-13",validate=True,end_date="2014-04-17",
+    advanced_st = sendgrid.AdvancedStatistics(data_Type="global", start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                                metric="all",category="WebD:CampId:3100",aggregated_by="day",country="US")
     status,msg = sg.send(advanced_st)
 
@@ -79,7 +81,7 @@ for example:
         status, msg = sg.send(general_st)
         
 
-        advanced_st = sendgrid.AdvancedStatistics("global","2014-04-13",validate=True,end_date="2014-04-17",
+        advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                             metric="all",category="WebD:CampId:3100")
         status,msg = sg.send(advanced_st)
 
@@ -155,7 +157,7 @@ Methods for Advanced Statistics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code::
-    advanced_st = sendgrid.AdvancedStatistics("global","2014-04-14")
+    advanced_st = sendgrid.AdvancedStatistics(data_type="global", start_date="2014-04-14")
 
 Setting the data_type
 ~~~~~~~~~~~~~~~~~~~~~

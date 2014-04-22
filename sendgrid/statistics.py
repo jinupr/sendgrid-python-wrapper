@@ -9,6 +9,7 @@
 
 import validations
 import sys
+import datetime
 
 from sendgrid import SendGridClient
 
@@ -141,7 +142,8 @@ class AdvancedStatistics(object):
 
     """ Sendgrid Advanced Statistics Base Class """
 
-    def __init__(self, data_type, start_date, validate=False,**opts):
+    def __init__(self, data_type="global",start_date=datetime.date.today().strftime("%Y-%m-%d"), 
+                validate=False,**opts):
         """
             Constructs Advanced Statistics Object
             Args:
