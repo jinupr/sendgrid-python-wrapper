@@ -55,8 +55,8 @@ By default set method will not validate the parameters
 however you can pass validate=True to GeneralStatistics or AdvancedStatistics
 constructor to validate the parameters before sending
 
-for example:
-    ```python
+For Example:
+```python
         general_st = sendgrid.GeneralStatistics(days=2,start_date="2014-04-14",end_date="2014-04-20",
                                             aggregate=0,category="WebD:CampId:3100",validate=True)
         status, msg = sg.send(general_st)
@@ -65,7 +65,7 @@ for example:
         advanced_st = sendgrid.AdvancedStatistics(data_type="global",start_date="2014-04-13",validate=True,end_date="2014-04-17",
                                             metric="all",category="WebD:CampId:3100")
         status,msg = sg.send(advanced_st)
-    ```
+```
 
 
 
