@@ -50,7 +50,9 @@ class SendGridClient(SendGridClient):
     def _legacy_send(self, data):
         try:
             return self._make_request(data)
-        except HTTPError as e:
+        except requests.HTTPError as e:
+            return e.code, e.read()
+        except requests.ConnectionError as e:
             return e.code, e.read()
         except timeout as e:
             return 408, e
@@ -58,7 +60,7 @@ class SendGridClient(SendGridClient):
     def _raising_send(self, data):
         try:
             self._make_request(data)
-        except HTTPError as e:
+        except requests.HTTPError as e:
             if e.code in range(400, 500):
                 raise SendGridClientError(e.code, e.read())
             elif e.code in range(500, 600):
